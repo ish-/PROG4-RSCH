@@ -2,9 +2,11 @@
 
 ## Introduction
 
-In this project, I will explore ways for custom post-processing in Unreal and  how its Post Process Material allows developers to inject custom logic into the rendering pipeline, leveraging existing buffers (SceneColor, SceneDepth, Velocity, etc) and external textures to create feedback loops utilizing Render Targets to store the previous frame’s image and feed it back into the current frame, focusing initially on creating a simple trails effect and gradually extending it with more advanced features like displacement driven by various render buffers, datamosh and glitches.
+In this project, I will explore ways for custom post-processing in Unreal and  how its Post Process Material allows developers to inject custom logic into the rendering pipeline, leveraging existing buffers (SceneColor, SceneDepth, Velocity, etc), focusing initially on creating a simple trails effect and gradually extending it with more advanced features like displacement driven by various render buffers, datamosh and glitches, feedback loops utilizing Render Targets to store the previous frame’s image and feed it back into the current frame.
 
 The end goal is to produce a module or pack of tools that can be comfortably and efficiently reused in different Unreal Engine scenes. This research aims to investigate existing methods and experiment with new approaches.
+
+![](docs/videos/mosh_rounded.cut.gif)
 
 <!-- ![](docs/imgs/Exmpl-0.png) -->
 ![](docs/videos/mosh_rounded.png)
@@ -62,7 +64,6 @@ Migrate **ThirdPerson**, **Characters**, **StarterContent**, **LevelPrototyping*
 
 ![](docs/videos/mosh_outside.cut.gif)
 ![](docs/videos/mosh_inside.cut.gif)
-![](docs/videos/mosh_rounded.cut.gif)
 
 <img src="docs/imgs/Exmpl-1.png"/>
 <img src="docs/imgs/Exmpl-2.png"/>
