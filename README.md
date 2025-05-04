@@ -72,11 +72,21 @@ Migrate **ThirdPerson**, **Characters**, **StarterContent**, **LevelPrototyping*
 
 ## Results
 
-![](docs/videos/mosh_outside.cut.gif)
+Using Custom Stencil we can reach different effects for character.
+
+Predator:
+
 ![](docs/videos/mosh_inside.cut.gif)
 
-<img src="docs/imgs/Exmpl-1.png"/>
-<img src="docs/imgs/Exmpl-2.png"/>
+Emitting smoke:
+
+![](docs/videos/mosh_outside.cut.gif)
+
+It could look like more satureted with objects on background scene:
+![](docs/imgs/Exmpl-1.png)
+
+And also live constantly evaluting glitches:
+![](docs/imgs/Exmpl-2.png)
 
 ## Problems
 
