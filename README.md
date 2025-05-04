@@ -41,10 +41,9 @@ This plugin made with low level C++ pipeline hooks. I'm going to explore the bou
 ## Approach
 
 ### Modular Structure
-- **`M_PP_Feedback`** – A material that blends the last frame with the current one.
+- **`M_PP_Feedback`** – A material that blends the last frame with the current one manipulating pixels with different G-buffers.
 - **`AC_CameraCapture`** – The main component for the pawn that dynamically creates and renders RenderTargets while adjusting the material of the post-process volume.
 - **`SceneCapture_Feedback`** - adjusted SceneCapture2D component.
-- **`MM_PP_Feedback`** - PostProcess Material where you can adjust all custom logic for your visual effect.
 
 ### User Project Structure
 - **PostProcess Volume** with an empty slot for the `M_PP_Feedback` material in the pipeline.
