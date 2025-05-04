@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this project, I will explore ways for custom post-processing in Unreal and  how its Post Process Material allows developers to inject custom logic into the rendering pipeline, leveraging existing buffers (SceneColor, SceneDepth, Velocity, etc), focusing initially on creating a simple trails effect and gradually extending it with more advanced features like displacement driven by various render buffers, datamosh and glitches, feedback loops utilizing Render Targets to store the previous frame’s image and feed it back into the current frame.
+In this project, I will explore blueprint ways for custom post-processing in Unreal and how its Post Process Material allows developers to inject custom logic into the rendering pipeline, leveraging existing buffers (SceneColor, SceneDepth, Velocity, etc), focusing initially on creating a simple trails effect and gradually extending it with more advanced features like displacement driven by various render buffers, datamosh and glitches, feedback loops utilizing Render Targets to store the previous frame’s image and feed it back into the current frame.
 
 The end goal is to produce a module or pack of tools that can be comfortably and efficiently reused in different Unreal Engine scenes. This research aims to investigate existing methods and experiment with new approaches.
 
@@ -22,10 +22,21 @@ Discovered shortly after the invention of the first video recorder by Charlie Gi
 In the 1960s, artists began to explore video feedback's creative potential.By the 1970s and 1980s, video feedback found its way into mainstream media. Notably, the opening title sequence of the British TV series Doctor Who (1963–1973) utilized a technique known as "howl-around," a form of video feedback. Music videos like Queen's "Bohemian Rhapsody" (1975) and Earth, Wind & Fire's "September" (1978) also employed feedback effects to create visually captivating experiences.
 
 ![](docs/imgs/2025-04-22-00-12-15.png)
-
+<!--
 Cellular automata (CAs) are mathematical models used to simulate complex systems using simple, local rules. Just like video feedback loops create intricate visual patterns from a recursion, generating emergent patterns.
 
-![](https://i.ytimg.com/vi/xP5-iIeKXE8/maxresdefault.jpg)
+![](https://i.ytimg.com/vi/xP5-iIeKXE8/maxresdefault.jpg) -->
+
+### Datamosh Effect plugin for UE
+
+> Post process shader that creates a frame blending effect by simulating a video editing technique in which the footage is manipulated to look "glitchy", usually by manual compression.
+
+![](docs/imgs/unreal-dotomosh-plugin.jpg)
+
+
+[Fab](https://www.fab.com/listings/f54fa19f-b19a-4330-88a6-a467f6a00bca) | [Youtube](https://www.youtube.com/watch?v=Uapad3pVxBY)
+
+This plugin made with low level C++ pipeline hooks. I'm going to explore the boundaries of what is allowed and how deep I can get inside of engine with blueprints to make it accessable even for not programmers. Looking ahead, I should say that this is actually enough!
 
 ## Approach
 
@@ -33,7 +44,7 @@ Cellular automata (CAs) are mathematical models used to simulate complex systems
 - **`M_PP_Feedback`** – A material that blends the last frame with the current one.
 - **`AC_CameraCapture`** – The main component for the pawn that dynamically creates and renders RenderTargets while adjusting the material of the post-process volume.
 - **`SceneCapture_Feedback`** - adjusted SceneCapture2D component.
-- **`MM_PP_Feedback`** - PostProcess Material
+- **`MM_PP_Feedback`** - PostProcess Material where you can adjust all custom logic for your visual effect.
 
 ### User Project Structure
 - **PostProcess Volume** with an empty slot for the `M_PP_Feedback` material in the pipeline.
