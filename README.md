@@ -65,7 +65,19 @@ This plugin made with low level C++ pipeline hooks. I'm going to explore the bou
 Since all operations are handled manually, any automatic actions should be disabled. It’s not immediately obvious, but "Persist State" is not enabled by default—unlike the standard camera settings. I'll experiment with other "Final Color" buffers in the future.
 
 #### `MM_PP_Feedback` Parameters
-![](docs/imgs/2025-04-22-00-15-48.png)
+![](docs/imgs/MM_PP_Feedback.png)
+- `Effect Power` - Interpolation between the current frame and the last processed frame.
+- `UV Roundness` - Controls how pixelated the sampling appears.
+- `Velocity Impact` - A multiplier for displacement based on the Velocity G-Buffer.
+- `Velocity Noise Amp` - Noise factor added to, or multiplied by, the velocity.
+- `Depth Impact` - Applies `Smoothstep(From, To)` - `Depth Impact` - Applies `Smoothstep(From, To)` in depth measures and value interpolation with `Lerp(Min, Max)`.
+ `Lerp(Min, Max)`.
+- `Noise` - Controls the amplitude and scale of the noise. Speed multiplies Time to animate the noise in 3D space.
+
+Since PostProcess Materials must be compiled before Unreal Engine runtime, this material should be copied and customized for specific use cases — such as utilizing a (blurred) CustomStencil buffer, positioning relative to the player’s camera etc. You'll find useful NamedRoutes inside, and you can freely adjust the node noodles to achieve the desired effect.
+
+#### Controlling
+Use mouse wheel, control and shift modifiers to tweek params in example.
 
 ## Install
 Migrate **ThirdPerson**, **Characters**, **StarterContent**, **LevelPrototyping** from another project or use symlinks. Keep it immutable!
@@ -91,10 +103,12 @@ And also live constantly evaluting glitches:
 ## Problems
 
 ### SceneCapture
-G-buffer textures aren't exposed directly from the Unreal render pipeline. The only way to access them is by calling Capture() with a SceneCapture, which essentially triggers another full render. It introduces unnecessary overhead.
+G-buffer textures aren't exposed directly from the Unreal render pipeline. The only way to access them is by calling `Capture()` with a `SceneCapture`, which essentially triggers another full render. It introduces unnecessary overhead.
+
+I found that `CineCaptureComponent2D` from still experimental builtin plugin avoids its own additional render but at the same time it has some limitations and overcomplicates some physical camera `CineCamera` properties tweeks requiring more experiments to achieve practical usability.
 
 ### Velocity G-buffer
-The velocity buffer isn't linear as expected—it seems like the vectors are calculated from the lower-left corner of the screen, which makes interpretation tricky.
+The velocity buffer isn't linear as expected—it seems like the vectors are calculated from the lower-left corner of the screen, which makes interpretation tricky. To be honest, I noticed that this problem remains unresolved in most plugins.
 
 ### Alpha in PostProcessing
 The alpha channel isn't available in post-processing, but it could be useful for feeding back a mask through one of the channels.
